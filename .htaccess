@@ -1,0 +1,6 @@
+Options -Indexes
+
+RewriteEngine on
+RewriteBase /notes2-uncox-withMVC/
+RewriteCond %{REQUEST_URI} !\.{|jpg|css|png|js|webp|ttf|}
+RewriteRule .* index.php [L]
