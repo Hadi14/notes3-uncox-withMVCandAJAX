@@ -53,10 +53,10 @@ class NotesController
             $msg = "رکوردی برای حذف پیدا نشد";
             showmsg('fail', $msg, true);
         }
-        // $id = $_GET['id'];
         $id = $params[0];
         NoteModel::delete($id);
-        // $msg = "<h4>رکورد مورد نظر با موفقیت حذف شد.</h4> <br> <span>برای ورود به صفحه اصلی<a href=" . getBaseUrl() . "page/home> اینجا </a>کلیک کنید</span>";
-        // showmsg('success', $msg, true);
+        echo json_encode(array(
+            'status' => true
+        ));
     }
 }

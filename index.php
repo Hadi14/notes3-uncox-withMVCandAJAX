@@ -29,7 +29,6 @@
         $params[] = $parts[$i];
     }
     // echo "<br> method: " . $params[0] . "<hr>";
-
     // echo "PARAMS-1:  $params[0] <hr>";
     // br();
     // echo "controller: $controllerClassname";
@@ -38,17 +37,9 @@
     // br();
     // dump($params);
 
-
     $controllerClassname = ucfirst($controller) . "Controller";
-    // $controllerFilePath = "mvc/controller/" . $controller .  ".php";
-    // require_once($controllerFilePath);
     $controllerInstance = new  $controllerClassname();
-
     $controllerInstance->$method($params);
-
-
-
-
     ?>
 </body>
 

@@ -20,9 +20,45 @@
             <td><?= $row['noteTitle'] ?></td>
             <td><?= $row['noteText'] ?></td>
             <td><?= $row['noteTime'] ?></td>
-            <td><a href="<?= getBaseUrl() ?>notes/edit/<?= $row['noteID'] ?>/<?= $t ?>"> <i class="bi bi-pencil-square"></i></a></td>
-            <td><a href="<?= getBaseUrl() ?>notes/remove/<?= $row['noteID'] ?>"> <i class="bi bi-calendar-x"></i></a></td>
+
+            <td><span onclick="editNote(this,<?= $row['noteID'] ?>)"> <i class="bi bi-pencil-square"></i></span></td>
+
+            <td><span onclick="deleteNote(this,<?= $row['noteID'] ?>)"> <i class="bi bi-calendar-x"></i></span></td>
+
         </tr>
     <? } ?>
 </table><br>
 <div class="insertdiv"> <a class="insertrecord" href="<?= getBaseUrl() ?>notes/submit">درج نت</a></div>
+
+<script>
+    function editNote() {
+        $.ajax('<?= getBaseUrl() ?>notes/edit/<?= $row['noteID'] ?>', {
+            type: 'post',
+            dataType: "JSON",
+            data: {
+                key: inpvalue
+            },
+            success: function(data) {
+                // console.log(data);
+                // $('#txtbox').html(data);
+                // var dec = JSON.parse(data);
+                $('#txtbox').html(data.content);
+            }
+        })
+    }
+
+
+
+    function deleteNote(element, noteid) {
+        elem = $(element);
+        var parent = elem.parentsUntil('td').parent();
+
+        $.ajax('notes3-uncox-withMVCandAJAX/notes/remove/' + noteid, {
+            type: 'post',
+            dataType: "JSON",
+            success: function(data) {
+                parent.remove();
+            }
+        })
+    }
+</script>
