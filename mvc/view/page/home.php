@@ -45,7 +45,7 @@
 
             success: function(data) {
                 console.log("SUCCESS Ok", data);
-                parent.remove();
+                $(sender).remove();
             }
         });
     }
