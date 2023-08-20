@@ -28,7 +28,7 @@
     for ($i = 3; $i < count($parts); $i++) {
         $params[] = $parts[$i];
     }
-    echo "<br> method: " . $params[0] . "<hr>";
+    // echo "<br> method: " . $params[0] . "<hr>";
 
     // echo "PARAMS-1:  $params[0] <hr>";
     // br();
