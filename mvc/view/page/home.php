@@ -41,12 +41,12 @@
 
         $.ajax('/notes3-uncox-withMVCandAJAX/notes/remove/' + noteId, {
             type: 'post',
-            dataType: 'text',
+            dataType: "JSON",
 
             success: function(data) {
                 console.log("SUCCESS Ok");
                 parent.remove();
-            }
+            },
         });
     }
 </script>

@@ -56,11 +56,13 @@ class NotesController
         //     $msg = "رکوردی برای حذف پیدا نشد";
         //     showmsg('fail', $msg, true);
         // }
+        // ob_start();
         $id = $params[0];
         NoteModel::delete($id);
 
-        echo json_encode(array(
-            'status' => true,
-        ));
+        // $ar["status"] = true;
+        // echo $ar;
+        // ob_end_clean();
+        echo json_encode(array("status" => true));
     }
 }

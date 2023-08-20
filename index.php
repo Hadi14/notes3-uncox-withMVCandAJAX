@@ -10,7 +10,7 @@
 
 <body>
 
-    <h1 class="h1class">index.php</h1>
+    <!-- <h1 class="h1class">index.php</h1> -->
     <?
     require_once('system/loader.php');
     $uri = getRequestUri();
@@ -20,8 +20,8 @@
     $method = $parts[2];
 
 
-    echo "<hr> controller: " . $controller;
-    echo "<br> method: " . $method . "<br>";
+    // echo "<hr> controller: " . $controller;
+    // echo "<br> method: " . $method . "<br>";
 
 
     $params = array();
