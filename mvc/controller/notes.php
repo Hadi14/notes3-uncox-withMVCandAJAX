@@ -59,9 +59,8 @@ class NotesController
         $id = $params[0];
         NoteModel::delete($id);
 
-        $out = json_encode(array(
+        echo json_encode(array(
             'status' => true,
         ));
-        echo $out;
     }
 }

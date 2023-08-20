@@ -41,11 +41,11 @@
 
         $.ajax('/notes3-uncox-withMVCandAJAX/notes/remove/' + noteId, {
             type: 'post',
-            dataType: 'json',
+            dataType: 'text',
 
             success: function(data) {
-                console.log("SUCCESS Ok", data);
-                $(sender).remove();
+                console.log("SUCCESS Ok");
+                parent.remove();
             }
         });
     }
