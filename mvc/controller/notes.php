@@ -47,16 +47,21 @@ class NotesController
     /******************************************************************************************/
     public  function remove($params)
     {
-        echo "Remove Method!!!";
+        // echo "oooooooooooooooooooooooo!!!";
+
+
         // dump($params);
-        if (!$params[0]) {
-            $msg = "رکوردی برای حذف پیدا نشد";
-            showmsg('fail', $msg, true);
-        }
+
+        // if (!$params[0]) {
+        //     $msg = "رکوردی برای حذف پیدا نشد";
+        //     showmsg('fail', $msg, true);
+        // }
         $id = $params[0];
         NoteModel::delete($id);
-        echo json_encode(array(
-            'status' => true
+
+        $out = json_encode(array(
+            'status' => true,
         ));
+        echo $out;
     }
 }

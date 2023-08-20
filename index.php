@@ -20,8 +20,8 @@
     $method = $parts[2];
 
 
-    // echo "<hr> controller: " . $controller;
-    // echo "<br> method: " . $method . "<br>";
+    echo "<hr> controller: " . $controller;
+    echo "<br> method: " . $method . "<br>";
 
 
     $params = array();

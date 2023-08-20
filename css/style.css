@@ -26,3 +26,7 @@ table {
     direction: rtl;
     margin: 20px auto;
 }
+
+span.link{
+    cursor: pointer;
+}

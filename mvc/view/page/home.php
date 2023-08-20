@@ -15,15 +15,15 @@
         $t = $row['noteTitle'];
 
     ?>
-        <tr>
+        <tr class="todo-entry">
             <td><?= $row['noteID'] ?></td>
             <td><?= $row['noteTitle'] ?></td>
             <td><?= $row['noteText'] ?></td>
             <td><?= $row['noteTime'] ?></td>
 
-            <td><span onclick="editNote(this,<?= $row['noteID'] ?>)"> <i class="bi bi-pencil-square"></i></span></td>
+            <td><span class="link" onclick="editNote(this,<?= $row['noteID'] ?>)"> <i class="bi bi-pencil-square"></i></span></td>
 
-            <td><span onclick="deleteNote(this,<?= $row['noteID'] ?>)"> <i class="bi bi-calendar-x"></i></span></td>
+            <td><span class="link" onclick="deleteNote(this,<?= $row['noteID'] ?>)"> <i class="bi bi-calendar-x"></i></span></td>
 
         </tr>
     <? } ?>
@@ -32,33 +32,21 @@
 
 <script>
     function editNote() {
-        $.ajax('<?= getBaseUrl() ?>notes/edit/<?= $row['noteID'] ?>', {
-            type: 'post',
-            dataType: "JSON",
-            data: {
-                key: inpvalue
-            },
-            success: function(data) {
-                // console.log(data);
-                // $('#txtbox').html(data);
-                // var dec = JSON.parse(data);
-                $('#txtbox').html(data.content);
-            }
-        })
+
     }
 
+    function deleteNote(sender, noteId) {
+        sender = $(sender);
+        var parent = sender.parentsUntil('tr').parent();
 
-
-    function deleteNote(element, noteid) {
-        elem = $(element);
-        var parent = elem.parentsUntil('td').parent();
-
-        $.ajax('notes3-uncox-withMVCandAJAX/notes/remove/' + noteid, {
+        $.ajax('/notes3-uncox-withMVCandAJAX/notes/remove/' + noteId, {
             type: 'post',
-            dataType: "JSON",
+            dataType: 'json',
+
             success: function(data) {
+                console.log("SUCCESS Ok", data);
                 parent.remove();
             }
-        })
+        });
     }
 </script>
