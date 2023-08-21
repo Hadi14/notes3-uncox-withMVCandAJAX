@@ -25,15 +25,14 @@ class NotesController
         // echo "<hr>" . $_POST['title'] . "<hr>";
         // echo "<hr>" . $_POST['text'] . "<hr>";
         // echo "<hr>" . $_POST['time'] . "<hr>";
-        if (!$_POST['id']) {
-            // echo "Show Infoooooooooooooooooooooo:" . $_POST['id'];
+
+
+        if (!isset($_POST['id'])) {
             $nid = $params[0];
-            // echo "<hr>this is noteID: $nid<hr>";
             $row = NoteModel::first($nid);
             $un = $_SESSION['uname'];
             Render::render('note/edit.php', $row);
         } else {
-            // echo "Sended info for editttttttttttttttttttttttttttt";
             $rowAffect = NoteModel::edit($_POST['id'], $_POST['title'], $_POST['text'], $_POST['time'],);
             if ($rowAffect) {
                 $msg = "<h4>رکورد مورد نظر با موفقیت ویرایش شد.</h4> <br> <span>برای ورود به صفحه اصلی<a href=" . getBaseUrl() . "page/home> اینجا </a>کلیک کنید</span>";

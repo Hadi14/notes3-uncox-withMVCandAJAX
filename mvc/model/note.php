@@ -4,7 +4,7 @@
     public static  function insert($id, $title, $text, $time)
     {
         $db = Db::getInstance();
-        $un=$_SESSION['uname'];
+        $un = $_SESSION['uname'];
         $db->insert("insert into x_note (noteID,noteTitle,noteText,noteTime,username) values  ('$id','$title','$text','$time','$un')");
         header("Location: " . getBaseUrl() . "page/home");
     }
@@ -34,6 +34,7 @@
     /*********************************************************************/
     public static function first($nid)
     {
+        // dump($nid);
         $db = Db::getInstance();
         $sql = "select * from  x_note where noteID='$nid'";
         $record = $db->first($sql);

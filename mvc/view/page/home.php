@@ -20,7 +20,7 @@
             <td><?= $row['noteTitle'] ?></td>
             <td><?= $row['noteText'] ?></td>
             <td><?= $row['noteTime'] ?></td>
-            <td><span class="link" onclick="editNote(this,<?= $row['noteID'] ?>)"> <i class="bi bi-pencil-square"></i></span></td>
+            <td><a class="link" href="<?= getBaseUrl() ?>notes/edit/<?= $row['noteID'] ?>"> <i class="bi bi-pencil-square"></i></a></td>
             <td><span class="link" onclick="deleteNote(this,<?= $row['noteID'] ?>)"> <i class="bi bi-calendar-x"></i></span></td>
         </tr>
     <? } ?>
