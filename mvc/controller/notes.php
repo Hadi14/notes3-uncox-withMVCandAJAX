@@ -35,9 +35,9 @@ class NotesController
         } else {
 ?>
             <script>
-                $.ajax('/notes3-uncox-withMVCandAJAX/notes/doedit/' + noteId, {
+                $.ajax('/notes3-uncox-withMVCandAJAX/notes/doedit/' + <?= $params[0] ?>, {
                     type: 'post',
-                    dataType: "JSON",
+                    dataType: "text",
                     success: function(data) {
                         console.log("Edit SUCCESS Ok");
                     },
@@ -50,7 +50,8 @@ class NotesController
     /******************************************************************************************/
     public  function doedit($params)
     {
-        $rowAffect = NoteModel::edit($_POST['id'], $_POST['title'], $_POST['text'], $_POST['time'],);
+        echo $_POST['id'];
+        $rowAffect = NoteModel::edit($_POST['id'], $_POST['title'], $_POST['text'], $_POST['time']);
         if ($rowAffect) {
             // $msg = "<h4>رکورد مورد نظر با موفقیت ویرایش شد.</h4> <br> <span>برای ورود به صفحه اصلی<a href=" . getBaseUrl() . "page/home> اینجا </a>کلیک کنید</span>";
             // showmsg("success", $msg, false);
