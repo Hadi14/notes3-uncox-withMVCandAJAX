@@ -33,6 +33,19 @@ class NotesController
             $un = $_SESSION['uname'];
             Render::render('note/edit.php', $row);
         } else {
+?>
+            <script>
+                    $.ajax('/notes3-uncox-withMVCandAJAX/notes/edit/' + noteId, {
+                        type: 'post',
+                        dataType: "JSON",
+                        success: function(data) {
+                            console.log("SUCCESS Ok");
+                            parent.remove();
+                        },
+                    });
+             
+            </script>
+<?
             $rowAffect = NoteModel::edit($_POST['id'], $_POST['title'], $_POST['text'], $_POST['time'],);
             if ($rowAffect) {
                 $msg = "<h4>رکورد مورد نظر با موفقیت ویرایش شد.</h4> <br> <span>برای ورود به صفحه اصلی<a href=" . getBaseUrl() . "page/home> اینجا </a>کلیک کنید</span>";
