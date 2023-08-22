@@ -14,7 +14,7 @@
     foreach ($records as $row) {
         $t = $row['noteTitle'];
 
-        
+
     ?>
         <tr class="todo-entry">
             <td id="nidtr"><?= $row['noteID'] ?></td>
@@ -56,27 +56,27 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="/notes3-uncox-withMVCandAJAX/notes/edit/<?= $row['noteID'] ?>">
                     <div class="mb-0">
                         <label for="recipient-name1" class="col-form-label">کد نوت:</label>
-                        <input type="text" class="form-control" id="recipient-name1">
+                        <input name="id" type="text" class="form-control" id="recipient-name1">
                     </div>
                     <div class="mb-0">
                         <label for="recipient-name2" class="col-form-label">عوان نوت:</label>
-                        <input type="text" class="form-control" id="recipient-name2">
+                        <input name="title" type="text" class="form-control" id="recipient-name2">
                     </div>
                     <div class="mb-0">
                         <label for="recipient-name3" class="col-form-label">زمان نوت:</label>
-                        <input type="text" class="form-control" id="recipient-name3">
+                        <input name="time" type="text" class="form-control" id="recipient-name3">
                     </div>
                     <div class="mb-0">
                         <label for="message-text" class="col-form-label">متن نوت:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
+                        <textarea name="text" class="form-control" id="message-text"></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">ویرایش</button>
+                <button type="submit" class="btn btn-primary" onclick="editNote('<?= $row['noteID'] ?>')">ویرایش</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خروج</button>
             </div>
         </div>
@@ -90,6 +90,18 @@
         $('#recipient-name2').val(ntitle);
         $('#message-text').val(ntext);
         $('#recipient-name3').val(ntime);
-        console.log(nid, ntitle, ntext, ntime);
+        // console.log(nid, ntitle, ntext, ntime);
+    }
+
+    function editNote(noteId) {
+        // console.log(noteId);
+        $.ajax('/notes3-uncox-withMVCandAJAX/notes/edit/' + noteId, {
+            type: 'post',
+            dataType: "JSON",
+            success: function(data) {
+                console.log("SUCCESS Ok");
+
+            },
+        });
     }
 </script>
