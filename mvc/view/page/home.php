@@ -14,6 +14,7 @@
     foreach ($records as $row) {
         $t = $row['noteTitle'];
 
+        
     ?>
         <tr class="todo-entry">
             <td id="nidtr"><?= $row['noteID'] ?></td>
