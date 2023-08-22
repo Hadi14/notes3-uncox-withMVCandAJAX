@@ -16,11 +16,11 @@
 
     ?>
         <tr class="todo-entry">
-            <td><?= $row['noteID'] ?></td>
+            <td id="nidtr"><?= $row['noteID'] ?></td>
             <td><?= $row['noteTitle'] ?></td>
             <td><?= $row['noteText'] ?></td>
             <td><?= $row['noteTime'] ?></td>
-            <td><a class="link" href="<?= getBaseUrl() ?>notes/edit/<?= $row['noteID'] ?>"> <i class="bi bi-pencil-square"></i></a></td>
+            <td><a onClick="submitText('<?= $row['noteID'] ?>','<?= $row['noteTitle'] ?>','<?= $row['noteText'] ?>','<?= $row['noteTime'] ?>')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a></td>
             <td><span class="link" onclick="deleteNote(this,<?= $row['noteID'] ?>)"> <i class="bi bi-calendar-x"></i></span></td>
         </tr>
     <? } ?>
@@ -46,31 +46,49 @@
     }
 </script>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" dir="rtl">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">ویرایش اطلاعات رکورد</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                    <div class="mb-0">
+                        <label for="recipient-name1" class="col-form-label">کد نوت:</label>
+                        <input type="text" class="form-control" id="recipient-name1">
                     </div>
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label">Message:</label>
+                    <div class="mb-0">
+                        <label for="recipient-name2" class="col-form-label">عوان نوت:</label>
+                        <input type="text" class="form-control" id="recipient-name2">
+                    </div>
+                    <div class="mb-0">
+                        <label for="recipient-name3" class="col-form-label">زمان نوت:</label>
+                        <input type="text" class="form-control" id="recipient-name3">
+                    </div>
+                    <div class="mb-0">
+                        <label for="message-text" class="col-form-label">متن نوت:</label>
                         <textarea class="form-control" id="message-text"></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
+                <button type="button" class="btn btn-primary">ویرایش</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خروج</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function submitText(nid, ntitle, ntext, ntime) {
+
+        $('#recipient-name1').val(nid);
+        $('#recipient-name2').val(ntitle);
+        $('#message-text').val(ntext);
+        $('#recipient-name3').val(ntime);
+        console.log(nid, ntitle, ntext, ntime);
+    }
+</script>
