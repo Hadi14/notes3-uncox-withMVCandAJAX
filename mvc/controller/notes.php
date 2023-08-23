@@ -35,13 +35,13 @@ class NotesController
         } else {
             echo "ok POST ...........";
             // echo $_POST['id'];
-            $rowAffect = NoteModel::edit($_POST['id'], $_POST['title'], $_POST['text'], $_POST['time']);
-            if ($rowAffect) {
-                // $msg = "<h4>رکورد مورد نظر با موفقیت ویرایش شد.</h4> <br> <span>برای ورود به صفحه اصلی<a href=" . getBaseUrl() . "page/home> اینجا </a>کلیک کنید</span>";
-                // showmsg("success", $msg, false);
-                $ar = array("id" => $_POST['id'], "title" => $_POST['title'], "text" => $_POST['text'], "time" => $_POST['time']);
-                echo json_encode($ar);
-            }
+            // $rowAffect = NoteModel::edit($_POST['id'], $_POST['title'], $_POST['text'], $_POST['time']);
+            // if ($rowAffect) {
+            //     // $msg = "<h4>رکورد مورد نظر با موفقیت ویرایش شد.</h4> <br> <span>برای ورود به صفحه اصلی<a href=" . getBaseUrl() . "page/home> اینجا </a>کلیک کنید</span>";
+            //     // showmsg("success", $msg, false);
+            //     $ar = array("id" => $_POST['id'], "title" => $_POST['title'], "text" => $_POST['text'], "time" => $_POST['time']);
+            //     echo json_encode($ar);
+            // }
             //  else {
             //     $msg = "ویرایش رکورد با خطا روبرو شد لطفا مجددا سعی بفرمائید<br> <span>برای ورود به صفحه اصلی<a href=" . getBaseUrl() . "page/home> اینجا </a>کلیک کنید</span>";
             //     showmsg('fail', $msg, true);

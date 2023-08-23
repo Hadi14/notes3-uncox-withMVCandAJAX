@@ -28,24 +28,7 @@
 </table><br>
 <div class="insertdiv"> <a class="insertrecord" href="<?= getBaseUrl() ?>notes/submit">درج نت</a></div>
 
-<script>
-    function editNote() {
 
-    }
-
-    function deleteNote(sender, noteId) {
-        sender = $(sender);
-        var parent = sender.parentsUntil('tr').parent();
-        $.ajax('/notes3-uncox-withMVCandAJAX/notes/remove/' + noteId, {
-            type: 'post',
-            dataType: "JSON",
-            success: function(data) {
-                console.log("SUCCESS Ok");
-                parent.remove();
-            },
-        });
-    }
-</script>
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -56,7 +39,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/notes3-uncox-withMVCandAJAX/notes/edit/<?= $row['noteID'] ?>">
+                <form>
                     <div class="mb-0">
                         <label for="recipient-name1" class="col-form-label">کد نوت:</label>
                         <input name="id" type="text" class="form-control" id="recipient-name1">
@@ -76,28 +59,48 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" onclick="editNote('<?= $row['noteID'] ?>')">ویرایش</button>
+                <button class="btn btn-primary" onclick="editNote('<?= $row['noteID'] ?>')">ویرایش</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خروج</button>
             </div>
         </div>
     </div>
 </div>
-
 <script>
+    function deleteNote(sender, noteId) {
+        sender = $(sender);
+        var parent = sender.parentsUntil('tr').parent();
+        $.ajax('/notes3-uncox-withMVCandAJAX/notes/remove/' + noteId, {
+            type: 'post',
+            dataType: "JSON",
+            success: function(data) {
+                console.log("SUCCESS Ok");
+                parent.remove();
+            },
+        });
+    }
+</script>
+<script>
+    // fill modal fields from data Record
     function submitText(nid, ntitle, ntext, ntime) {
-
         $('#recipient-name1').val(nid);
         $('#recipient-name2').val(ntitle);
         $('#message-text').val(ntext);
         $('#recipient-name3').val(ntime);
-        // console.log(nid, ntitle, ntext, ntime);
     }
-
+    // do edit recrd by modal fileds and ajax 
     function editNote(noteId) {
-        // console.log(noteId);
+        var ntitle = $('#recipient-name2').val();
+        var ntext = $('#message-text').val();
+        var ntime = $('#recipient-name3').val(ntime);
         $.ajax('/notes3-uncox-withMVCandAJAX/notes/edit/' + noteId, {
             type: 'post',
             dataType: "JSON",
+            data: {
+                'id': noteId,
+                'title': ntitle,
+                'text': ntext,
+                'time': ntime,
+            },
             success: function(data) {
                 console.log("SUCCESS Ok");
 
