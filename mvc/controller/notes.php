@@ -25,7 +25,7 @@ class NotesController
         // echo "<hr>" . $_POST['title'] . "<hr>";
         // echo "<hr>" . $_POST['text'] . "<hr>";
         // echo "<hr>" . $_POST['time'] . "<hr>";
-
+        echo "EDDD";
         if (!isset($_POST['id'])) {
             echo "Not POST .........";
             $nid = $params[0];

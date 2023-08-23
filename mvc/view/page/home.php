@@ -30,7 +30,7 @@
 
 
 
-
+<!--------------------------- modal  ------------------------------------------------------------------------->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" dir="rtl">
         <div class="modal-content">
@@ -65,6 +65,7 @@
         </div>
     </div>
 </div>
+<!--------------------------------- End of Modal ----------------------------------------------------------->
 <script>
     function deleteNote(sender, noteId) {
         sender = $(sender);
@@ -96,7 +97,7 @@
             type: 'post',
             dataType: "JSON",
             data: {
-                'id': noteId,
+
                 'title': ntitle,
                 'text': ntext,
                 'time': ntime,
