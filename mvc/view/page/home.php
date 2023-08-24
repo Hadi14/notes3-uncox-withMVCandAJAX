@@ -110,4 +110,22 @@
             },
         });
     }
+
+
+    function getall(){
+        $.ajax('/notes3-uncox-withMVCandAJAX/notes/edit/' + noteId, {
+            type: 'post',
+            dataType: "json",
+            data: {
+                'id': noteId,
+                'title': ntitle,
+                'text': ntext,
+                'time': ntime,
+            },
+            success: function(data) {
+                console.log("SUCCESS Ok");
+
+            },
+        });
+    }
 </script>
