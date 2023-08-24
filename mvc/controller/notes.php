@@ -25,27 +25,21 @@ class NotesController
         // echo "<hr>" . $_POST['title'] . "<hr>";
         // echo "<hr>" . $_POST['text'] . "<hr>";
         // echo "<hr>" . $_POST['time'] . "<hr>";
-        echo "EDDD";
-        if (!isset($_POST['id'])) {
-            echo "Not POST .........";
+        // echo   "<hr>" . $_SESSION['uname'] . "<hr>";
+        if (!isset($_POST['title'])) {
             $nid = $params[0];
             $row = NoteModel::first($nid);
             $un = $_SESSION['uname'];
             Render::render('note/edit.php', $row);
         } else {
-            echo "ok POST ...........";
-            // echo $_POST['id'];
-            // $rowAffect = NoteModel::edit($_POST['id'], $_POST['title'], $_POST['text'], $_POST['time']);
-            // if ($rowAffect) {
-            //     // $msg = "<h4>رکورد مورد نظر با موفقیت ویرایش شد.</h4> <br> <span>برای ورود به صفحه اصلی<a href=" . getBaseUrl() . "page/home> اینجا </a>کلیک کنید</span>";
-            //     // showmsg("success", $msg, false);
-            //     $ar = array("id" => $_POST['id'], "title" => $_POST['title'], "text" => $_POST['text'], "time" => $_POST['time']);
-            //     echo json_encode($ar);
-            // }
-            //  else {
-            //     $msg = "ویرایش رکورد با خطا روبرو شد لطفا مجددا سعی بفرمائید<br> <span>برای ورود به صفحه اصلی<a href=" . getBaseUrl() . "page/home> اینجا </a>کلیک کنید</span>";
-            //     showmsg('fail', $msg, true);
-            // }
+            $rowAffect = NoteModel::edit($_SESSION['uname'], $_POST['title'], $_POST['text'], $_POST['time']);
+            if ($rowAffect) {
+                $ar = array("id" => $_SESSION['uname'], "title" => $_POST['title'], "text" => $_POST['text'], "time" => $_POST['time']);
+                echo json_encode($ar);
+            } else {
+                $msg = "ویرایش رکورد با خطا روبرو شد لطفا مجددا سعی بفرمائید<br> <span>برای ورود به صفحه اصلی<a href=" . getBaseUrl() . "page/home> اینجا </a>کلیک کنید</span>";
+                showmsg('fail', $msg, true);
+            }
         }
     }
 

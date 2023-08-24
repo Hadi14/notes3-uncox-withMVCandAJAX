@@ -92,12 +92,13 @@
     function editNote(noteId) {
         var ntitle = $('#recipient-name2').val();
         var ntext = $('#message-text').val();
-        var ntime = $('#recipient-name3').val(ntime);
+        var ntime = $('#recipient-name3').val();
+        // var ntime = "ok";
+        console.log(noteId, ntitle, ntext, ntime);
         $.ajax('/notes3-uncox-withMVCandAJAX/notes/edit/' + noteId, {
             type: 'post',
-            dataType: "JSON",
+            dataType: "text",
             data: {
-
                 'title': ntitle,
                 'text': ntext,
                 'time': ntime,
