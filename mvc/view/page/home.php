@@ -97,8 +97,9 @@
         console.log(noteId, ntitle, ntext, ntime);
         $.ajax('/notes3-uncox-withMVCandAJAX/notes/edit/' + noteId, {
             type: 'post',
-            dataType: "text",
+            dataType: "json",
             data: {
+                'id': noteId,
                 'title': ntitle,
                 'text': ntext,
                 'time': ntime,

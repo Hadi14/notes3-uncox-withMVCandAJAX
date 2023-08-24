@@ -26,6 +26,7 @@
     /********************************************************************* */
     public static function edit($nid, $ntitle, $ntext, $ntime)
     {
+        // echo $nid, $ntitle, $ntext, $ntime;
         $db = Db::getInstance();
         $sql = "update x_note set noteTitle='$ntitle',noteText='$ntext',noteTime='$ntime' where noteID='$nid'";
         $rowAffect = $db->modify($sql);
