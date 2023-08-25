@@ -65,6 +65,7 @@
         </div>
     </div>
 </div>
+<button onclick="fetch()">fetchAll</button>
 <!--------------------------------- End of Modal ----------------------------------------------------------->
 <script>
     function deleteNote(sender, noteId) {
@@ -112,7 +113,7 @@
     }
 
 
-    function getall(){
+    function getall() {
         $.ajax('/notes3-uncox-withMVCandAJAX/notes/edit/' + noteId, {
             type: 'post',
             dataType: "json",
@@ -122,6 +123,19 @@
                 'text': ntext,
                 'time': ntime,
             },
+            success: function(data) {
+                console.log("SUCCESS Ok");
+
+            },
+        });
+    }
+
+
+    function fetch() {
+        $.ajax('/notes3-uncox-withMVCandAJAX/page/home/', {
+            type: 'post',
+            dataType: "text",
+
             success: function(data) {
                 console.log("SUCCESS Ok");
 
