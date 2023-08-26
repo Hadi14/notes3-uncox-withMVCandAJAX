@@ -132,14 +132,15 @@
 
 
     function fetch() {
-        $.ajax('/notes3-uncox-withMVCandAJAX/page/home/', {
-            type: 'post',
-            dataType: "text",
+        // $.ajax('/notes3-uncox-withMVCandAJAX/page/home/', {
+        //     type: 'post',
+        //     dataType: "html",
 
-            success: function(data) {
-                console.log("SUCCESS Ok");
+        //     success: function(data) {
+        //         console.log("SUCCESS Ok");
 
-            },
-        });
+        //     },
+        // });
+        header("Location:/notes3-uncox-withMVCandAJAX/page/home/ ")
     }
 </script>
