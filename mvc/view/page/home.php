@@ -59,7 +59,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" onclick="editNote('<?= $row['noteID'] ?>')">ویرایش</button>
+                <button class="btn btn-primary" data-bs-dismiss="modal" onclick="editNote('<?= $row['noteID'] ?>')">ویرایش</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خروج</button>
             </div>
         </div>
@@ -89,7 +89,9 @@
         $('#message-text').val(ntext);
         $('#recipient-name3').val(ntime);
     }
+    /******************************************************************* */
     // do edit recrd by modal fileds and ajax 
+
     function editNote(noteId) {
         var ntitle = $('#recipient-name2').val();
         var ntext = $('#message-text').val();
@@ -98,7 +100,7 @@
         console.log(noteId, ntitle, ntext, ntime);
         $.ajax('/notes3-uncox-withMVCandAJAX/notes/edit/' + noteId, {
             type: 'post',
-            dataType: "json",
+            dataType: "text",
             data: {
                 'id': noteId,
                 'title': ntitle,
@@ -132,15 +134,15 @@
 
 
     function fetch() {
-        // $.ajax('/notes3-uncox-withMVCandAJAX/page/home/', {
-        //     type: 'post',
-        //     dataType: "html",
+        $.ajax('/notes3-uncox-withMVCandAJAX/notes/getAllNote/', {
+            type: 'post',
+            dataType: "html",
 
-        //     success: function(data) {
-        //         console.log("SUCCESS Ok");
+            success: function(data) {
+                console.log("SUCCESS Ok");
 
-        //     },
-        // });
-        header("Location:/notes3-uncox-withMVCandAJAX/page/home/ ")
+            },
+        });
+        // window.location.replace("/notes3-uncox-withMVCandAJAX/page/home/ ")
     }
 </script>

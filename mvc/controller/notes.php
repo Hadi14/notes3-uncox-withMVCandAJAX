@@ -12,6 +12,19 @@ class NotesController
     /****************************************************************************************** */
     public  function getAllNote()
     {
+        // if (!isset($_SESSION['uname'])) {
+        // Render::render('user/login', array());
+        header("Location:" . getBaseUrl() . 'user/login/');
+        // } else {
+        // echo "-HOME --- Me";
+        // if ($_SESSION['uname']) {
+        $un = $_SESSION['uname'];
+        $data['records'] = NoteModel::allNotes($un);
+        // } else {
+        // $data['records']  = null;
+        // }
+        Render::render('page/home.php', $data);
+        // }
     }
     /****************************************************************************************** */
     public  function submitNote()
@@ -25,11 +38,7 @@ class NotesController
     /******************************************************************************************/
     public  function edit($params)
     {
-        // echo "<hr>" . $_POST['id'] . "<hr>";
-        // echo "<hr>" . $_POST['title'] . "<hr>";
-        // echo "<hr>" . $_POST['text'] . "<hr>";
-        // echo "<hr>" . $_POST['time'] . "<hr>";
-        // echo "<hr>" . $_SESSION['uname'] . "<hr>";
+
         if (!isset($_POST['title'])) {
             $nid = $params[0];
             $row = NoteModel::first($nid);
@@ -39,6 +48,7 @@ class NotesController
             $rowAffect = NoteModel::edit($_POST['id'], $_POST['title'], $_POST['text'], $_POST['time']);
             if ($rowAffect) {
                 $ar = array("id" => $_POST['id'], "title" => $_POST['title'], "text" => $_POST['text'], "time" => $_POST['time']);
+
                 echo json_encode($ar);
             } else {
                 $msg = "ویرایش رکورد با خطا روبرو شد لطفا مجددا سعی بفرمائید<br> <span>برای ورود به صفحه اصلی<a href=" . getBaseUrl() . "page/home> اینجا </a>کلیک کنید</span>";
