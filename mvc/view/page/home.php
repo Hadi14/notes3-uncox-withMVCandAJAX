@@ -136,13 +136,13 @@
     function fetch() {
         $.ajax('/notes3-uncox-withMVCandAJAX/notes/getAllNote/', {
             type: 'post',
-            dataType: "html",
+            dataType: "json",
 
             success: function(data) {
-                console.log("SUCCESS Ok");
+                console.log(data);
+                console.log(data[0]['noteText']);
 
             },
         });
-        // window.location.replace("/notes3-uncox-withMVCandAJAX/page/home/ ")
     }
 </script>

@@ -14,16 +14,17 @@ class NotesController
     {
         // if (!isset($_SESSION['uname'])) {
         // Render::render('user/login', array());
-        header("Location:" . getBaseUrl() . 'user/login/');
+        // header("Location:" . getBaseUrl() . 'user/login/');
         // } else {
         // echo "-HOME --- Me";
         // if ($_SESSION['uname']) {
         $un = $_SESSION['uname'];
         $data['records'] = NoteModel::allNotes($un);
+        echo json_encode($data['records']);
         // } else {
         // $data['records']  = null;
         // }
-        Render::render('page/home.php', $data);
+        // Render::render('page/home.php', $data);
         // }
     }
     /****************************************************************************************** */
