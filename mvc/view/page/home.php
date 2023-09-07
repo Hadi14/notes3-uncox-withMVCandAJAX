@@ -13,7 +13,9 @@
     }
     foreach ($records as $row) {
         $t = $row['noteTitle'];
-
+        $nid = $row['noteID'];
+        $txt = $row['noteText'];
+        $time = $row['noteTime'];
 
     ?>
         <tr class="todo-entry">
@@ -21,7 +23,7 @@
             <td><?= $row['noteTitle'] ?></td>
             <td><?= $row['noteText'] ?></td>
             <td><?= $row['noteTime'] ?></td>
-            <td><a onClick='submitText("<?= $row['noteID'] ?>","<?= $row['noteTitle'] ?>","<?= $row['noteText'] ?>"," <?= $row['noteTime'] ?>")' data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a></td>
+            <td><a onclick="submitText('<?= $nid ?>','<?= $t ?>','<?= $txt ?>',' <?= $time ?>')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a></td>
             <td><span class="link" onclick="deleteNote(this,<?= $row['noteID'] ?>)"> <i class="bi bi-calendar-x"></i></span></td>
         </tr>
     <? } ?>
@@ -59,13 +61,12 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" data-bs-dismiss="modal" onclick="editNote('<?= $row['noteID'] ?>')">ویرایش</button>
+                <button class="btn btn-primary" data-bs-dismiss="modal" onclick="editNote()">ویرایش</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خروج</button>
             </div>
         </div>
     </div>
 </div>
-<button onclick="fetch()">fetchAll</button>
 <!--------------------------------- End of Modal ----------------------------------------------------------->
 <script>
     function deleteNote(sender, noteId) {
@@ -84,6 +85,7 @@
 <script>
     // fill modal fields from data Record
     function submitText(nid, ntitle, ntext, ntime) {
+        // console.log(nid);
         $('#recipient-name1').val(nid);
         $('#recipient-name2').val(ntitle);
         $('#message-text').val(ntext);
@@ -92,13 +94,14 @@
     /******************************************************************* */
     // do edit recrd by modal fileds and ajax 
 
-    function editNote(noteId) {
+    function editNote() {
+
         var ntitle = $('#recipient-name2').val();
         var nid = $('#recipient-name1').val();
 
         var ntext = $('#message-text').val();
         var ntime = $('#recipient-name3').val();
-        console.log(noteId, ntitle, ntext, ntime);
+        console.log(nid, ntitle, ntext, ntime);
         $.ajax('/notes3-uncox-withMVCandAJAX/notes/edit/' + nid, {
             type: 'post',
             dataType: "text",
@@ -109,11 +112,9 @@
                 'time': ntime,
             },
             success: function(data) {
-                // console.log("SUCCESS Ok");
                 fetch();
             },
         });
-        // console.log(nid);
     }
 
 
@@ -136,14 +137,10 @@
 
 
     function fetch() {
-        // alert("dfgffffffffff");
         $.ajax('/notes3-uncox-withMVCandAJAX/notes/getAllNote/', {
             type: 'post',
             dataType: "json",
-
             success: function(data) {
-                // console.log(data);
-                // console.log(data[0]['noteText']);
                 $(".rcdtable .todo-entry").remove();
                 data.forEach(element => {
                     $(".rcdtable").append(' <tr class="todo-entry">' +
@@ -152,16 +149,8 @@
                         '<td>' + element['noteText'] + '</td>' +
                         '<td>' + element['noteTime'] + '</td>' +
                         '<td><a onClick="submitText(' + element['noteID'] + ',' + element['noteTitle'] + ',' + element['noteText'] + ',' + element['noteTime'] + ')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a>' + '</td>' +
-
                         '<td><span class="link" onClick="deleteNote(' + this + ',' + element['noteID'] + ')">' + '<i class="bi bi-calendar-x"></i></span></td>' +
                         '</tr>');
-                    // console.log(element['noteID']);
-                    // console.log(element['noteTitle']);
-                    // console.log(element['username']);
-                    // console.log(element['noteTime']);
-                    // console.log(element['noteText']);
-
-
                 });
             },
         });

@@ -1,1 +1,6 @@
- <td><a onClick="submitText(\''<?= $row['noteID'] ?>'\','\'<?= $row['noteTitle'] ?>'\','\'<?= $row['noteText'] ?>'\',\''<?= $row['noteTime'] ?>'\')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a></td>
+<td><a onClick='submitText("<?= $row[' noteID'] ?>","
+        <?= $row['noteTitle'] ?>","
+        <?= $row['noteText'] ?>","
+        <?= $row['noteTime'] ?>")' data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i
+            class="bi bi-pencil-square"></i>
+    </a></td>
