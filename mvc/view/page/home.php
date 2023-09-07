@@ -149,9 +149,9 @@
                         '<td>' + element['noteTitle'] + '</td>' +
                         '<td>' + element['noteText'] + '</td>' +
                         '<td>' + element['noteTime'] + '</td>' +
-                        '<td><a onClick="submitText(' + element['noteID'] + ',' + element['noteTitle'] + ',' + element['noteText'] + ',' + element['noteTime'] + ') data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a>' + '</td>' +
+                        '<td><a onClick="submitText(' + element['noteID'] + ',' + element['noteTitle'] + ',' + element['noteText'] + ',' + element['noteTime'] + ')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a>' + '</td>' +
 
-                        '<td><span class="link" onClick="deleteNote(' + this, element['noteID'] + ')">' + '<i class="bi bi-calendar-x"></i></span></td>' +
+                        '<td><span class="link" onClick="deleteNote(' + this + ',' + element['noteID'] + ')">' + '<i class="bi bi-calendar-x"></i></span></td>' +
                         '</tr>');
                     // console.log(element['noteID']);
                     // console.log(element['noteTitle']);
