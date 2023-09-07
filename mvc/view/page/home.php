@@ -21,8 +21,7 @@
             <td><?= $row['noteTitle'] ?></td>
             <td><?= $row['noteText'] ?></td>
             <td><?= $row['noteTime'] ?></td>
-            <td><a onClick="submitText('<?= $row['noteID'] ?>','<?= $row['noteTitle'] ?>','<?= $row['noteText'] ?>','<?= $row['noteTime'] ?>')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a></td>
-
+            <td><a onClick='submitText("<?= $row['noteID'] ?>","<?= $row['noteTitle'] ?>","<?= $row['noteText'] ?>"," <?= $row['noteTime'] ?>")' data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a></td>
             <td><span class="link" onclick="deleteNote(this,<?= $row['noteID'] ?>)"> <i class="bi bi-calendar-x"></i></span></td>
         </tr>
     <? } ?>
@@ -76,7 +75,7 @@
             type: 'post',
             dataType: "JSON",
             success: function(data) {
-                console.log("SUCCESS Ok");
+                // console.log("SUCCESS Ok");
                 parent.remove();
             },
         });
@@ -95,24 +94,26 @@
 
     function editNote(noteId) {
         var ntitle = $('#recipient-name2').val();
+        var nid = $('#recipient-name1').val();
+
         var ntext = $('#message-text').val();
         var ntime = $('#recipient-name3').val();
-        // var ntime = "ok";
         console.log(noteId, ntitle, ntext, ntime);
-        $.ajax('/notes3-uncox-withMVCandAJAX/notes/edit/' + noteId, {
+        $.ajax('/notes3-uncox-withMVCandAJAX/notes/edit/' + nid, {
             type: 'post',
             dataType: "text",
             data: {
-                'id': noteId,
+                'id': nid,
                 'title': ntitle,
                 'text': ntext,
                 'time': ntime,
             },
             success: function(data) {
-                console.log("SUCCESS Ok");
-
+                // console.log("SUCCESS Ok");
+                fetch();
             },
         });
+        // console.log(nid);
     }
 
 
@@ -127,7 +128,7 @@
                 'time': ntime,
             },
             success: function(data) {
-                console.log("SUCCESS Ok");
+                // console.log("SUCCESS Ok88");
 
             },
         });
@@ -135,6 +136,7 @@
 
 
     function fetch() {
+        // alert("dfgffffffffff");
         $.ajax('/notes3-uncox-withMVCandAJAX/notes/getAllNote/', {
             type: 'post',
             dataType: "json",
