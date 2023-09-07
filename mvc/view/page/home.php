@@ -1,4 +1,4 @@
-<table>
+<table class="rcdtable">
     <tr>
         <th>کد نت</th>
         <th>عنوان نت</th>
@@ -22,6 +22,7 @@
             <td><?= $row['noteText'] ?></td>
             <td><?= $row['noteTime'] ?></td>
             <td><a onClick="submitText('<?= $row['noteID'] ?>','<?= $row['noteTitle'] ?>','<?= $row['noteText'] ?>','<?= $row['noteTime'] ?>')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a></td>
+
             <td><span class="link" onclick="deleteNote(this,<?= $row['noteID'] ?>)"> <i class="bi bi-calendar-x"></i></span></td>
         </tr>
     <? } ?>
@@ -139,9 +140,28 @@
             dataType: "json",
 
             success: function(data) {
-                console.log(data);
-                console.log(data[0]['noteText']);
+                // console.log(data);
+                // console.log(data[0]['noteText']);
+                $(".rcdtable .todo-entry").remove();
+                data.forEach(element => {
+                    $(".rcdtable").append(' <tr class="todo-entry">' +
+                        '<td id="nidtr">' + element['noteID'] + '</td>' +
+                        '<td>' + element['noteTitle'] + '</td>' +
+                        '<td>' + element['noteText'] + '</td>' +
+                        '<td>' + element['noteTime'] + '</td>' +
+                        '<td><a onClick="submitText(' + element['noteID'] + ',' + element['noteTitle'] + ',' + element['noteText'] + ',' + element['noteTime'] + ') data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a>' + '></td>' +
 
+
+
+                        '<td><span class="link" onclick="deleteNote(' + element['noteTitle'] + '</td>');
+                    // console.log(element['noteID']);
+                    // console.log(element['noteTitle']);
+                    // console.log(element['username']);
+                    // console.log(element['noteTime']);
+                    // console.log(element['noteText']);
+
+
+                });
             },
         });
     }
