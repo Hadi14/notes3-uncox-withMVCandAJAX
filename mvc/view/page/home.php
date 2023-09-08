@@ -23,9 +23,6 @@
             <td id="ntit"><?= $row['noteTitle'] ?></td>
             <td id="ntex"><?= $row['noteText'] ?></td>
             <td id="ntim"><?= $row['noteTime'] ?></td>
-
-            <!-- <td><a onclick="editRecord('<? //= $row['noteID'] 
-                                                ?>')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a></td> -->
             <td><a onclick="editRecord('<?= $row['noteID'] ?>','<?= $row['noteTitle'] ?>','<?= $row['noteText'] ?>','<?= $row['noteTime'] ?>')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a></td>
             <td><span class="link" onclick="deleteNote(this,<?= $row['noteID'] ?>)"> <i class="bi bi-calendar-x"></i></span></td>
         </tr>
@@ -92,34 +89,13 @@
 <script>
     // fill modal fields from data Record
     function editRecord(id, tit, tex, tim) {
-        // var list = <? //php echo json_encode($records); 
-                        ?>;
-        // console.log(list);
-        // list.forEach(item => {
-        //     if (item.noteID == id) {
-        // var nid = $('#nidtr').text();
-        // var ntit = $('#ntit').text();
-        // var ntext = $('#ntex').text();
-        // var ntime = $('#ntim').text();
         console.log(id);
         $('#recipient-name1').val(id);
         $('#recipient-name2').val(tit);
         $('#message-text').val(tex);
         $('#recipient-name3').val(tim);
-
-        // }
-        // })
     }
-    // fill modal fields from data Record
-    /******************************************************************* */
-    // function submitText(nid, ntitle, ntext, ntime) {
-    //     // console.log(nid);
-    //     $('#recipient-name1').val(nid);
-    //     $('#recipient-name2').val(ntitle);
-    //     $('#message-text').val(ntext);
-    //     $('#recipient-name3').val(ntime);
-    // }
-    /******************************************************************* */
+
     // do edit recrd by modal fileds and ajax 
     function editNote() {
         var ntitle = $('#recipient-name2').val();
