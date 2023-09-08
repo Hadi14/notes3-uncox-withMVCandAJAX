@@ -16,7 +16,7 @@ if (isset($_SESSION['uname'])) {
         <input name="uname" type="text"><br><br>
         <label for="">Password</label>
         <input name="pass" type="password"><br><br>
-        <input class="btnblue" type="submit" value="ُSend"><br><br>
+        <input class="btnblue" type="submit" value="Send"><br><br>
     </form>
     <a href="<?= getBaseUrl() ?>user/register">Create New Account</a>
 </div>

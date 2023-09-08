@@ -20,10 +20,11 @@
     ?>
         <tr class="todo-entry">
             <td id="nidtr"><?= $row['noteID'] ?></td>
-            <td><?= $row['noteTitle'] ?></td>
-            <td><?= $row['noteText'] ?></td>
-            <td><?= $row['noteTime'] ?></td>
-            <td><a onclick="submitText('<?= $nid ?>','<?= $t ?>','<?= $txt ?>',' <?= $time ?>')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a></td>
+            <td id="ntit"><?= $row['noteTitle'] ?></td>
+            <td id="ntex"><?= $row['noteText'] ?></td>
+            <td id="ntim"><?= $row['noteTime'] ?></td>
+
+            <td><a onclick="editRecord('<?= $row['noteID'] ?>')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a></td>
             <td><span class="link" onclick="deleteNote(this,<?= $row['noteID'] ?>)"> <i class="bi bi-calendar-x"></i></span></td>
         </tr>
     <? } ?>
@@ -44,7 +45,7 @@
                 <form>
                     <div class="mb-0">
                         <label for="recipient-name1" class="col-form-label">کد نوت:</label>
-                        <input name="id" type="text" class="form-control" id="recipient-name1">
+                        <input disabled name="id" type="text" class="form-control" id="recipient-name1">
                     </div>
                     <div class="mb-0">
                         <label for="recipient-name2" class="col-form-label">عوان نوت:</label>
@@ -69,6 +70,10 @@
 </div>
 <!--------------------------------- End of Modal ----------------------------------------------------------->
 <script>
+    var list = <?php echo json_encode($records); ?>
+
+    console.log(list);
+    // const host = "1pelak.ir/"
     function deleteNote(sender, noteId) {
         sender = $(sender);
         var parent = sender.parentsUntil('tr').parent();
@@ -84,23 +89,41 @@
 </script>
 <script>
     // fill modal fields from data Record
-    function submitText(nid, ntitle, ntext, ntime) {
-        // console.log(nid);
-        $('#recipient-name1').val(nid);
-        $('#recipient-name2').val(ntitle);
-        $('#message-text').val(ntext);
-        $('#recipient-name3').val(ntime);
+    function editRecord(id) {
+        var list = <?php echo json_encode($records); ?>;
+        console.log(list);
+        list.forEach(item => {
+            if (item.noteID == id) {
+                var nid = $('#nidtr').text();
+                var ntit = $('#ntit').text();
+                var ntext = $('#ntex').text();
+                var ntime = $('#ntim').text();
+                console.log(nid);
+                $('#recipient-name1').val(nid);
+                $('#recipient-name2').val(ntit);
+                $('#message-text').val(ntext);
+                $('#recipient-name3').val(ntime);
+
+            }
+        })
     }
+    // fill modal fields from data Record
+    /******************************************************************* */
+    // function submitText(nid, ntitle, ntext, ntime) {
+    //     // console.log(nid);
+    //     $('#recipient-name1').val(nid);
+    //     $('#recipient-name2').val(ntitle);
+    //     $('#message-text').val(ntext);
+    //     $('#recipient-name3').val(ntime);
+    // }
     /******************************************************************* */
     // do edit recrd by modal fileds and ajax 
-
     function editNote() {
-
         var ntitle = $('#recipient-name2').val();
         var nid = $('#recipient-name1').val();
-
         var ntext = $('#message-text').val();
         var ntime = $('#recipient-name3').val();
+        console.log("EDDDDit fields");
         console.log(nid, ntitle, ntext, ntime);
         $.ajax('/notes3-uncox-withMVCandAJAX/notes/edit/' + nid, {
             type: 'post',
@@ -129,7 +152,6 @@
                 'time': ntime,
             },
             success: function(data) {
-                // console.log("SUCCESS Ok88");
 
             },
         });
@@ -148,9 +170,10 @@
                         '<td>' + element['noteTitle'] + '</td>' +
                         '<td>' + element['noteText'] + '</td>' +
                         '<td>' + element['noteTime'] + '</td>' +
-                        '<td><a onClick="submitText(' + element['noteID'] + ',' + element['noteTitle'] + ',' + element['noteText'] + ',' + element['noteTime'] + ')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a>' + '</td>' +
+                        '<td><a onclick="editRecord(' + element['noteID'] + ')"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a>' + '</td>' +
                         '<td><span class="link" onClick="deleteNote(' + this + ',' + element['noteID'] + ')">' + '<i class="bi bi-calendar-x"></i></span></td>' +
                         '</tr>');
+
                 });
             },
         });

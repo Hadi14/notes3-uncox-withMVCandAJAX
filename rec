@@ -1,6 +1,13 @@
 <td><a onClick='submitText("<?= $row[' noteID'] ?>","
-        <?= $row['noteTitle'] ?>","
-        <?= $row['noteText'] ?>","
-        <?= $row['noteTime'] ?>")' data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i
-            class="bi bi-pencil-square"></i>
-    </a></td>
+                <?= $row['noteTitle'] ?>","
+                <?= $row['noteText'] ?>","
+                <?= $row['noteTime'] ?>")' data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href="">
+                <i class="bi bi-pencil-square"></i>
+        </a></td>
+
+
+<!-- <td><a onclick="submitText('<?= $nid ?>','<?= $t ?>','<?= $txt ?>',' <?= $time ?>')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a></td> -->
+
+
+fetch:
+'<td><a onClick="submitText(' + element['noteID'] + ',' + element['noteTitle'] + ',' + element['noteText'] + ',' + element['noteTime'] + ')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a>' + '</td>' +
