@@ -28,11 +28,48 @@
         </tr>
     <? } ?>
 </table><br>
-<div class="insertdiv"> <a class="insertrecord" href="<?= getBaseUrl() ?>notes/submit">درج نت</a></div>
+<div class="insertdiv"> <a class="insertrecord" href="#" data-bs-target="#addModal" data-bs-toggle="modal">درج نت</a></div>
 
 
 
-<!--------------------------- modal  ------------------------------------------------------------------------->
+<!---------------------------Add modal  ------------------------------------------------------------------------->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" dir="rtl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">ثبت نوت </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-0">
+                        <label for="recipient-name1" class="col-form-label">کد نوت:</label>
+                        <input name="id" type="text" class="form-control" id="add-recipient-name1">
+                    </div>
+                    <div class="mb-0">
+                        <label for="recipient-name2" class="col-form-label">عنوان نوت:</label>
+                        <input name="title" type="text" class="form-control" id="add-recipient-name2">
+                    </div>
+                    <div class="mb-0">
+                        <label for="recipient-name3" class="col-form-label">زمان نوت:</label>
+                        <input name="time" type="text" class="form-control" id="add-recipient-name3">
+                    </div>
+                    <div class="mb-0">
+                        <label for="message-text" class="col-form-label">متن نوت:</label>
+                        <textarea name="text" class="form-control" id="add-message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-dismiss="modal" onclick="addNote()">ثبت</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خروج</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--------------------------------- End of Add Modal ----------------------------------------------------------->
+
+<!--------------------------- Edit modal  ------------------------------------------------------------------------->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" dir="rtl">
         <div class="modal-content">
@@ -47,7 +84,7 @@
                         <input disabled name="id" type="text" class="form-control" id="recipient-name1">
                     </div>
                     <div class="mb-0">
-                        <label for="recipient-name2" class="col-form-label">عوان نوت:</label>
+                        <label for="recipient-name2" class="col-form-label">عنوان نوت:</label>
                         <input name="title" type="text" class="form-control" id="recipient-name2">
                     </div>
                     <div class="mb-0">
@@ -82,6 +119,26 @@
             success: function(data) {
                 // console.log("SUCCESS Ok");
                 parent.remove();
+            },
+        });
+    }
+    /************************************************** */
+    function addNote() {
+        var ntitle = $('#add-recipient-name2').val();
+        var nid = $('#add-recipient-name1').val();
+        var ntext = $('#add-message-text').val();
+        var ntime = $('#add-recipient-name3').val();
+        $.ajax('/notes3-uncox-withMVCandAJAX/notes/submitNote/' + nid, {
+            type: 'post',
+            dataType: "text",
+            data: {
+                'id': nid,
+                'title': ntitle,
+                'text': ntext,
+                'time': ntime,
+            },
+            success: function(data) {
+                fetch();
             },
         });
     }
