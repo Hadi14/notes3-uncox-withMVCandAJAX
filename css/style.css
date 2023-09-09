@@ -27,6 +27,10 @@ table {
     margin: 20px auto;
 }
 
-span.link{
+span.link {
     cursor: pointer;
+}
+
+.insertdiv {
+    text-align: center;
 }
