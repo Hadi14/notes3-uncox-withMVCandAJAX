@@ -71,7 +71,7 @@
 <script>
     var list = <?php echo json_encode($records); ?>
 
-    console.log(list);
+    // console.log(list);
     // const host = "1pelak.ir/"
     function deleteNote(sender, noteId) {
         sender = $(sender);
@@ -89,7 +89,7 @@
 <script>
     // fill modal fields from data Record
     function editRecord(id, tit, tex, tim) {
-        console.log(id);
+        // console.log(id);
         $('#recipient-name1').val(id);
         $('#recipient-name2').val(tit);
         $('#message-text').val(tex);
@@ -102,8 +102,8 @@
         var nid = $('#recipient-name1').val();
         var ntext = $('#message-text').val();
         var ntime = $('#recipient-name3').val();
-        console.log("EDDDDit fields");
-        console.log(nid, ntitle, ntext, ntime);
+        // console.log("EDDDDit fields");
+        // console.log(nid, ntitle, ntext, ntime);
         $.ajax('/notes3-uncox-withMVCandAJAX/notes/edit/' + nid, {
             type: 'post',
             dataType: "text",
@@ -150,7 +150,7 @@
                         '<td>' + element['noteText'] + '</td>' +
                         '<td>' + element['noteTime'] + '</td>' +
                         '<td><a onclick="editRecord(' + "'" + element['noteID'] + "','" + element['noteTitle'] + "','" + element['noteText'] + "','" + element['noteTime'] + "'" + ')"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="link" href=""> <i class="bi bi-pencil-square"></i></a>' + '</td>' +
-                        '<td><span class="link" onClick="deleteNote(' + this + ',' + element['noteID'] + ')">' + '<i class="bi bi-calendar-x"></i></span></td>' +
+                        '<td><span class="link" onclick="deleteNote(' + "this" + ',' + element['noteID'] + ')">' + '<i class="bi bi-calendar-x"></i></span></td>' +
                         '</tr>');
 
                 });
